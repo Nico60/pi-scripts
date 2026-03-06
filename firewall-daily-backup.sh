@@ -7,7 +7,8 @@ REAL_USER="${SUDO_USER:-$USER}"
 REAL_GROUP="$(id -gn "$REAL_USER" 2>/dev/null || echo "$REAL_USER")"
 REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 
-BACKUP_DIR="${BACKUP_DIR:-$BASE/backups/firewall-backups}"
+BASE="${BASE:-${REAL_HOME}/backups}"
+BACKUP_DIR="${BACKUP_DIR:-$BASE/firewall-backups}"
 DATE="$(date +%F_%H%M%S)"
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
