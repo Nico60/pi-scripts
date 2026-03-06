@@ -8,7 +8,8 @@ REAL_USER="${SUDO_USER:-$USER}"
 REAL_GROUP="$(id -gn "$REAL_USER" 2>/dev/null || echo "$REAL_USER")"
 REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 
-LOG_DIR="${LOG_DIR:-${REAL_HOME}/pi-update/logs}"
+BASE="${BASE:-${REAL_HOME}/backups}"
+LOG_DIR="${LOG_DIR:-$BASE/pi-update-logs}"
 TS="$(date +%F_%H%M%S)"
 LOG_FILE="$LOG_DIR/pi-update_$TS.log"
 
