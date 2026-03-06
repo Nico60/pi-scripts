@@ -26,7 +26,7 @@ command -v docker >/dev/null || { echo "docker introuvable"; exit 1; }
 
 test -d "$BASE" || { echo "Dossier introuvable: $BASE"; exit 1; }
 test -f "$BASE/docker-compose.yml" || { echo "docker-compose.yml introuvable dans $BASE"; exit 1; }
-test -d "$BASE/unbound" || { echo "unbound/ introuvable dans $BASE"; exit 1; }
+test -d "$BASE/config" || { echo "config/ introuvable dans $BASE"; exit 1; }
 
 install -d -m 700 -o "$REAL_USER" -g "$REAL_GROUP" "$BACKUP_DIR"
 cd "$BASE"
@@ -49,7 +49,7 @@ if [[ "$STOP_UNBOUND" -eq 1 ]]; then
 fi
 
 items=(docker-compose.yml)
-[[ -d unbound ]] && items+=(unbound)
+[[ -d config ]] && items+=(config)
 
 tar -czf "$OUT" "${items[@]}"
 

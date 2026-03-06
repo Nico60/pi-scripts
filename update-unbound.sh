@@ -12,7 +12,7 @@ BASE="${BASE:-${REAL_HOME}/stacks/unbound}"
 COMPOSE_FILE="${BASE}/docker-compose.yml"
 
 SERVICE_UNBOUND="${SERVICE_UNBOUND:-unbound}"
-IMAGE_UNBOUND="${IMAGE_UNBOUND:-mvance/unbound:latest}"
+IMAGE_UNBOUND="${IMAGE_UNBOUND:-ghcr.io/klutchell/unbound:latest}"
 
 NO_RESTART_IF_UPTODATE=0
 if [ "${1:-}" = "--no-restart-if-uptodate" ]; then
@@ -47,8 +47,8 @@ if [ "$UPDATED" -eq 1 ]; then
   BACKUP_DIR="$BASE/backups"
   install -d -m 700 -o "$REAL_USER" -g "$REAL_GROUP" "$BACKUP_DIR"
 
-  if [ -d "$BASE/unbound" ]; then
-    tar -czf "$BACKUP_DIR/unbound_$TS.tar.gz" -C "$BASE" docker-compose.yml unbound
+  if [ -d "$BASE/config" ]; then
+    tar -czf "$BACKUP_DIR/unbound_$TS.tar.gz" -C "$BASE" docker-compose.yml config
   else
     tar -czf "$BACKUP_DIR/unbound_$TS.tar.gz" -C "$BASE" docker-compose.yml
   fi
